@@ -1,54 +1,54 @@
 {
-    "name":  "@majico/sdk",
-    "version":  "1.0.1",
-    "description":  "TypeScript client for the Majico.xyz public API (brand guidelines, design tokens, export).",
-    "repository":  {
-                       "type":  "git",
-                       "url":  "git+https://github.com/majico-xyz/majico-sdk.git",
-                       "directory":  "packages/majico-sdk"
-                   },
-    "homepage":  "https://github.com/majico-xyz/majico-sdk#readme",
-    "bugs":  {
-                 "url":  "https://github.com/majico-xyz/majico.xyz/issues"
-             },
-    "publishConfig":  {
-                          "access":  "public"
-                      },
-    "type":  "module",
-    "main":  "index.js",
-    "types":  "index.d.ts",
-    "exports":  {
-                    ".":  {
-                              "types":  "./index.d.ts",
-                              "import":  "./index.js",
-                              "default":  "./index.js"
-                          }
-                },
-    "files":  [
-                  "dist",
-                  "index.js",
-                  "index.d.ts",
-                  "README.md"
-              ],
-    "scripts":  {
-                    "build":  "tsc",
-                    "typecheck":  "tsc --noEmit",
-                    "test":  "vitest run",
-                    "prepublishOnly":  "npm run typecheck \u0026\u0026 npm run build \u0026\u0026 npm test"
-                },
-    "keywords":  [
-                     "majico",
-                     "brand",
-                     "design-tokens",
-                     "api-client"
-                 ],
-    "license":  "MIT",
-    "engines":  {
-                    "node":  "\u003e=18"
-                },
-    "devDependencies":  {
-                            "@types/node":  "^22.19.0",
-                            "typescript":  "^5.9.0",
-                            "vitest":  "^4.1.6"
-                        }
+  "name": "@majico/sdk",
+  "version": "1.0.1",
+  "description": "TypeScript client for the Majico.xyz public API (brand guidelines, design tokens, export).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/majico-xyz/majico-sdk.git",
+    "directory": "packages/majico-sdk"
+  },
+  "homepage": "https://github.com/majico-xyz/majico-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/majico-xyz/majico.xyz/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js",
+      "default": "./index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "index.js",
+    "index.d.ts",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "prepublishOnly": "npm run typecheck && npm run build && npm test"
+  },
+  "keywords": [
+    "majico",
+    "brand",
+    "design-tokens",
+    "api-client"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.0",
+    "typescript": "^5.9.0",
+    "vitest": "^4.1.6"
+  }
 }
