@@ -8,6 +8,7 @@ import type {
   BlogPublishResponse,
   BlogResearchResponse,
   BlogSectionDraftResponse,
+  BlogSeoHandoffResponse,
   BlogWorkflowStepResponse,
   MajicoClientConfig,
 } from "../types.js";
@@ -117,5 +118,17 @@ export class BlogResource {
       projectMcpPath(this.config, "/blog/publish"),
       { method: "POST", body: JSON.stringify(args) }
     );
+  }
+
+  async seoHandoff(args?: {
+    postId?: string;
+  }): Promise<BlogSeoHandoffResponse> {
+    const params = new URLSearchParams();
+    if (args?.postId) params.set("postId", args.postId);
+    const qs = params.toString();
+    const path = qs
+      ? `${projectMcpPath(this.config, "/blog/seo-handoff")}?${qs}`
+      : projectMcpPath(this.config, "/blog/seo-handoff");
+    return majicoFetchJson<BlogSeoHandoffResponse>(this.config, path);
   }
 }

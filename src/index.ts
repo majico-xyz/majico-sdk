@@ -31,6 +31,7 @@ export type {
   BlogPostsListResponse,
   BlogPostResponse,
   BlogOpportunitiesResponse,
+  BlogSeoHandoffResponse,
   MajicoClientConfig,
   StudioCanvas,
   StudioResponse,

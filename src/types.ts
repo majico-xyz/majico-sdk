@@ -322,3 +322,41 @@ export type BlogPublishResponse = {
   scope: string;
   seo: unknown;
 };
+
+export type BlogSeoHandoffResponse = {
+  version: 1;
+  projectId: string;
+  workflow: {
+    steps: Array<{ tool: string; purpose: string; gate?: string }>;
+  };
+  seoGate: {
+    publishableScoreMin: number;
+    rules: Array<{
+      id: string;
+      label: string;
+      requirement: string;
+      weightHint?: number;
+    }>;
+    humanQuality: { description: string };
+  };
+  technicalSeo: {
+    sitemap: string;
+    robots: string;
+    canonical: string;
+    schema: string;
+    ogImage: string;
+    edgeStatic: string;
+  };
+  aeo: { guidelines: string[] };
+  agentInstructions: string;
+  markdown: string;
+  post?: {
+    postId: string;
+    slug: string;
+    status: string;
+    score: number | null;
+    publishable: boolean | null;
+    checklist: unknown[];
+    fixes: string[];
+  };
+};
