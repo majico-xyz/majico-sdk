@@ -51,6 +51,27 @@ export type McpCreateProjectResponse = {
   nextSteps: string[];
 };
 
+export type McpProjectApiKeyResponse = {
+  ok: true;
+  projectId: string;
+  projectApiKey: string;
+  rotated: boolean;
+  httpMcpConfig: {
+    type: "http";
+    url: string;
+    headers: {
+      Authorization: string;
+      "X-Majico-Project-Id": string;
+    };
+  };
+  envSnippet: {
+    MAJICO_API_URL: string;
+    MAJICO_PROJECT_ID: string;
+    MAJICO_API_KEY: string;
+  };
+  instructions: string[];
+};
+
 export class ProjectsResource {
   constructor(private readonly config: MajicoClientConfig) {}
 
@@ -79,6 +100,23 @@ export class ProjectsResource {
         method: "POST",
         body: JSON.stringify({ name }),
       }
+    );
+  }
+
+  /**
+   * Mint (if missing) or return the project API key for agent reuse after OAuth.
+   * Pass `{ rotate: true }` to invalidate the previous key.
+   */
+  async getApiKey(options?: {
+    rotate?: boolean;
+  }): Promise<McpProjectApiKeyResponse> {
+    const rotate = options?.rotate === true;
+    return majicoFetchJson<McpProjectApiKeyResponse>(
+      this.config,
+      projectMcpPath(this.config, "/api-key"),
+      rotate
+        ? { method: "POST", body: JSON.stringify({ rotate: true }) }
+        : { method: "GET" }
     );
   }
 }
