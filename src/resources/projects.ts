@@ -98,7 +98,30 @@ export class ProjectsResource {
       "/api/mcp/projects",
       {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name }),
+      }
+    );
+  }
+
+  /**
+   * Soft-delete a project owned by the authenticated user.
+   * Requires `{ confirm: true }`. Anonymizes the row (does not hard-delete).
+   */
+  async delete(
+    projectId: string,
+    options: { confirm: true }
+  ): Promise<{ ok: true; projectId: string }> {
+    if (options.confirm !== true) {
+      throw new Error("confirm: true is required to delete a project");
+    }
+    return majicoFetchJson<{ ok: true; projectId: string }>(
+      this.config,
+      "/api/mcp/projects",
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ projectId, confirm: true }),
       }
     );
   }
