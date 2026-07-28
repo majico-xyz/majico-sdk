@@ -57,6 +57,7 @@ export type CursorHandoffEvent =
   | "logo_selected"
   | "brand_ready"
   | "palette_selected"
+  | "font_pair_selected"
   | "pulse_x_linked"
   | "tweet_draft_selected";
 
@@ -159,6 +160,35 @@ export type PaletteSelectResponse = {
     light: Record<string, string>;
     dark: Record<string, string>;
   };
+  selectedOptionId: string | null;
+  cursorHandoff: CursorHandoffPayload;
+};
+
+export type FontPairOption = {
+  optionId: string;
+  label: string;
+  headingFont: string;
+  bodyFont: string;
+  reason: string | null;
+  source: "ai" | "curated" | null;
+  isAiSuggested: boolean;
+  isSelected: boolean;
+};
+
+export type FontPairCandidatesResponse = {
+  options: FontPairOption[];
+  selectedOptionId: string | null;
+  headingFont: string | null;
+  bodyFont: string | null;
+  availableFonts: string[];
+  projectId?: string | null;
+  projectName?: string | null;
+  agentInstructions?: string;
+};
+
+export type FontPairSelectResponse = {
+  headingFont: string;
+  bodyFont: string;
   selectedOptionId: string | null;
   cursorHandoff: CursorHandoffPayload;
 };

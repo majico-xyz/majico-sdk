@@ -11,6 +11,7 @@ import { ExportResource } from "./resources/export.js";
 import { GuidelinesResource } from "./resources/guidelines.js";
 import { LogoResource } from "./resources/logo.js";
 import { PaletteResource } from "./resources/palette.js";
+import { FontsResource } from "./resources/fonts.js";
 import { PulseResource } from "./resources/pulse.js";
 import { GitResource } from "./resources/git.js";
 import { StudioResource } from "./resources/studio.js";
@@ -27,6 +28,7 @@ export class MajicoClient {
   readonly tokens: TokensResource;
   readonly logo: LogoResource;
   readonly palette: PaletteResource;
+  readonly fonts: FontsResource;
   readonly pulse: PulseResource;
   readonly blog: BlogResource;
   readonly cursorHandoff: CursorHandoffResource;
@@ -61,6 +63,7 @@ export class MajicoClient {
     this.tokens = new TokensResource(this.config);
     this.logo = new LogoResource(this.config);
     this.palette = new PaletteResource(this.config);
+    this.fonts = new FontsResource(this.config);
     this.pulse = new PulseResource(this.config);
     this.blog = new BlogResource(this.config);
     this.cursorHandoff = new CursorHandoffResource(this.config);

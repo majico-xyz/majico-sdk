@@ -116,7 +116,7 @@ describe("MajicoClient", () => {
     );
   });
 
-  it("palette.listCandidates and blog.listPosts hit MCP paths", async () => {
+  it("palette.listCandidates and fonts.listCandidates hit MCP paths", async () => {
     const fetchMock = vi
       .fn()
       .mockResolvedValueOnce(
@@ -125,6 +125,18 @@ describe("MajicoClient", () => {
             options: [],
             selectedOptionId: null,
             paletteTokens: null,
+          }),
+          { status: 200 }
+        )
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            options: [],
+            selectedOptionId: null,
+            headingFont: null,
+            bodyFont: null,
+            availableFonts: [],
           }),
           { status: 200 }
         )
@@ -141,12 +153,16 @@ describe("MajicoClient", () => {
     });
 
     await client.palette.listCandidates();
+    await client.fonts.listCandidates();
     await client.blog.listPosts();
 
     expect(String(fetchMock.mock.calls[0]?.[0])).toContain(
       `/api/mcp/projects/${PROJECT_ID}/palettes`
     );
     expect(String(fetchMock.mock.calls[1]?.[0])).toContain(
+      `/api/mcp/projects/${PROJECT_ID}/fonts`
+    );
+    expect(String(fetchMock.mock.calls[2]?.[0])).toContain(
       `/api/mcp/projects/${PROJECT_ID}/blog/posts`
     );
   });
