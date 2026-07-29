@@ -1,18 +1,25 @@
-import { majicoFetchJson, projectMcpPath } from "../http.js";
+import { majicoFetchJson, projectMcpPath, withIfNoneMatch } from "../http.js";
 import type {
+  BrandAssetGetOptions,
   LogoCandidatesResponse,
   LogoResponse,
   LogoSelectResponse,
   MajicoClientConfig,
+  UnchangedBrandAssetResponse,
 } from "../types.js";
 
 export class LogoResource {
   constructor(private readonly config: MajicoClientConfig) {}
 
-  async get(): Promise<LogoResponse> {
-    return majicoFetchJson<LogoResponse>(
+  async get(
+    options?: BrandAssetGetOptions
+  ): Promise<LogoResponse | UnchangedBrandAssetResponse> {
+    return majicoFetchJson<LogoResponse | UnchangedBrandAssetResponse>(
       this.config,
-      projectMcpPath(this.config, "/logos")
+      withIfNoneMatch(
+        projectMcpPath(this.config, "/logos"),
+        options?.ifNoneMatch
+      )
     );
   }
 

@@ -148,3 +148,16 @@ export function projectMcpPath(
   const normalized = suffix.startsWith("/") ? suffix : `/${suffix}`;
   return `/api/mcp/projects/${id}${normalized}`;
 }
+
+/**
+ * Append `ifNoneMatch` query for conditional brand asset fetches.
+ */
+export function withIfNoneMatch(
+  path: string,
+  ifNoneMatch?: string | null
+): string {
+  const revision = ifNoneMatch?.trim();
+  if (!revision) return path;
+  const sep = path.includes("?") ? "&" : "?";
+  return `${path}${sep}ifNoneMatch=${encodeURIComponent(revision)}`;
+}

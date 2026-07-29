@@ -1,13 +1,23 @@
-import { majicoFetchJson, projectMcpPath } from "../http.js";
-import type { GuidelinesResponse, MajicoClientConfig } from "../types.js";
+import { majicoFetchJson, projectMcpPath, withIfNoneMatch } from "../http.js";
+import type {
+  BrandAssetGetOptions,
+  GuidelinesResponse,
+  MajicoClientConfig,
+  UnchangedBrandAssetResponse,
+} from "../types.js";
 
 export class GuidelinesResource {
   constructor(private readonly config: MajicoClientConfig) {}
 
-  async get(): Promise<GuidelinesResponse> {
-    return majicoFetchJson<GuidelinesResponse>(
+  async get(
+    options?: BrandAssetGetOptions
+  ): Promise<GuidelinesResponse | UnchangedBrandAssetResponse> {
+    return majicoFetchJson<GuidelinesResponse | UnchangedBrandAssetResponse>(
       this.config,
-      projectMcpPath(this.config, "/guidelines")
+      withIfNoneMatch(
+        projectMcpPath(this.config, "/guidelines"),
+        options?.ifNoneMatch
+      )
     );
   }
 }

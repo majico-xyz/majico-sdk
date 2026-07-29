@@ -1,13 +1,23 @@
-import { majicoFetchJson, projectMcpPath } from "../http.js";
-import type { DesignTokens, MajicoClientConfig } from "../types.js";
+import { majicoFetchJson, projectMcpPath, withIfNoneMatch } from "../http.js";
+import type {
+  BrandAssetGetOptions,
+  DesignTokens,
+  MajicoClientConfig,
+  UnchangedBrandAssetResponse,
+} from "../types.js";
 
 export class TokensResource {
   constructor(private readonly config: MajicoClientConfig) {}
 
-  async get(): Promise<DesignTokens> {
-    return majicoFetchJson<DesignTokens>(
+  async get(
+    options?: BrandAssetGetOptions
+  ): Promise<DesignTokens | UnchangedBrandAssetResponse> {
+    return majicoFetchJson<DesignTokens | UnchangedBrandAssetResponse>(
       this.config,
-      projectMcpPath(this.config, "/tokens")
+      withIfNoneMatch(
+        projectMcpPath(this.config, "/tokens"),
+        options?.ifNoneMatch
+      )
     );
   }
 }

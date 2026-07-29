@@ -13,8 +13,12 @@ export {
   normalizeBaseUrl,
   projectMcpPath,
   validateClientConfig,
+  withIfNoneMatch,
 } from "./http.js";
 export type {
+  BrandAssetGetOptions,
+  BrandAssetRevision,
+  BrandAssetsRevisionMap,
   BrandProfile,
   BrandMdResponse,
   DesignMdResponse,
@@ -38,6 +42,7 @@ export type {
   MajicoClientConfig,
   StudioCanvas,
   StudioResponse,
+  UnchangedBrandAssetResponse,
 } from "./types.js";
 export type { PatchHtmlFrameInput } from "./resources/studio.js";
 export type {

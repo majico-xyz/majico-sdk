@@ -1,5 +1,8 @@
 import { majicoFetchJson, projectMcpPath } from "../http.js";
-import type { MajicoClientConfig } from "../types.js";
+import type {
+  BrandAssetsRevisionMap,
+  MajicoClientConfig,
+} from "../types.js";
 
 export type McpProjectListItem = {
   id: string;
@@ -24,6 +27,7 @@ export type McpProjectPingResponse = {
   userId: string | null;
   hasBrandData: boolean;
   hasCanvasData: boolean;
+  brandAssets?: BrandAssetsRevisionMap;
   previewToken?: string | null;
   previewPickerUrl?: string | null;
 };

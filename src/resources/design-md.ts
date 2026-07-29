@@ -1,13 +1,23 @@
-import { majicoFetchJson, projectMcpPath } from "../http.js";
-import type { DesignMdResponse, MajicoClientConfig } from "../types.js";
+import { majicoFetchJson, projectMcpPath, withIfNoneMatch } from "../http.js";
+import type {
+  BrandAssetGetOptions,
+  DesignMdResponse,
+  MajicoClientConfig,
+  UnchangedBrandAssetResponse,
+} from "../types.js";
 
 export class DesignMdResource {
   constructor(private readonly config: MajicoClientConfig) {}
 
-  async get(): Promise<DesignMdResponse> {
-    return majicoFetchJson<DesignMdResponse>(
+  async get(
+    options?: BrandAssetGetOptions
+  ): Promise<DesignMdResponse | UnchangedBrandAssetResponse> {
+    return majicoFetchJson<DesignMdResponse | UnchangedBrandAssetResponse>(
       this.config,
-      projectMcpPath(this.config, "/design-md")
+      withIfNoneMatch(
+        projectMcpPath(this.config, "/design-md"),
+        options?.ifNoneMatch
+      )
     );
   }
 }

@@ -25,12 +25,16 @@ export type DesignTokens = {
   };
   headingFont: string | null;
   bodyFont: string | null;
+  revision?: string;
+  updatedAt?: string | null;
 };
 
 export type LogoResponse = {
   selectedLogoTemplateId: string | null;
   logoSvg: string | null;
   logoFavorites: unknown[];
+  revision?: string;
+  updatedAt?: string | null;
 };
 
 export type LogoCandidate = {
@@ -84,15 +88,43 @@ export type LogoSelectResponse = {
   cursorHandoff: CursorHandoffPayload;
 };
 
+export type BrandAssetRevision = {
+  revision: string;
+  updatedAt: string | null;
+};
+
+export type BrandAssetsRevisionMap = {
+  brandMd: BrandAssetRevision;
+  designMd: BrandAssetRevision;
+  designTokens: BrandAssetRevision;
+  guidelines: BrandAssetRevision;
+  logoSvg: BrandAssetRevision;
+};
+
+export type UnchangedBrandAssetResponse = {
+  unchanged: true;
+  revision: string;
+  updatedAt: string | null;
+};
+
+export type BrandAssetGetOptions = {
+  /** Skip markdown/body when this matches the current Studio revision. */
+  ifNoneMatch?: string | null;
+};
+
 export type GuidelinesResponse = {
   productName: string;
   markdown: string;
   llmPrompt: string;
+  revision?: string;
+  updatedAt?: string | null;
 };
 
 export type DesignMdResponse = {
   markdown: string;
   productName: string;
+  revision?: string;
+  updatedAt?: string | null;
 };
 
 export type BrandMdResponse = {
@@ -100,6 +132,8 @@ export type BrandMdResponse = {
   productName: string;
   source?: "job" | "scaffold";
   jobId?: string | null;
+  revision?: string;
+  updatedAt?: string | null;
 };
 
 export type StudioCanvas = {

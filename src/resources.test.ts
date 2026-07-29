@@ -159,6 +159,22 @@ describe("MajicoClient resources", () => {
     );
   });
 
+  it("designMd.get passes ifNoneMatch as query param", async () => {
+    const fetchMock = mockJsonFetch({
+      unchanged: true,
+      revision: "sha256:aaaaaaaaaaaaaaaa",
+      updatedAt: null,
+    });
+    const client = new MajicoClient(clientConfig);
+
+    await client.designMd.get({ ifNoneMatch: "sha256:aaaaaaaaaaaaaaaa" });
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      `${MCP_BASE}/design-md?ifNoneMatch=sha256%3Aaaaaaaaaaaaaaaaa`,
+      expect.any(Object)
+    );
+  });
+
   it("studio.get calls MCP studio path with Bearer auth", async () => {
     const fetchMock = mockJsonFetch({ canvas: { elements: [] } });
     const client = new MajicoClient(clientConfig);
