@@ -9,12 +9,18 @@ export class FontsResource {
   constructor(private readonly config: MajicoClientConfig) {}
 
   /**
-   * Lists font-pair options from the project's guidelines snapshot.
+   * Lists font-pair options from the project's guidelines snapshot
+   * (falls back to curated pairs; optional mood filters user font feedback).
    */
-  async listCandidates(): Promise<FontPairCandidatesResponse> {
+  async listCandidates(args?: {
+    mood?: string;
+  }): Promise<FontPairCandidatesResponse> {
+    const params = new URLSearchParams({ candidates: "1" });
+    const mood = args?.mood?.trim();
+    if (mood) params.set("mood", mood);
     return majicoFetchJson<FontPairCandidatesResponse>(
       this.config,
-      `${projectMcpPath(this.config, "/fonts")}?candidates=1`
+      `${projectMcpPath(this.config, "/fonts")}?${params.toString()}`
     );
   }
 

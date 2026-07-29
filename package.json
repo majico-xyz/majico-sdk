@@ -1,6 +1,6 @@
 {
   "name": "@majico/sdk",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "TypeScript client for the Majico.xyz public API (brand guidelines, design tokens, export).",
   "repository": {
     "type": "git",
