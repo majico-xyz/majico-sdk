@@ -18,6 +18,7 @@ import { StudioResource } from "./resources/studio.js";
 import { ResearchResource } from "./resources/research.js";
 import { AssetsResource } from "./resources/assets.js";
 import { QuiverResource } from "./resources/quiver.js";
+import { GrokResource } from "./resources/grok.js";
 import { ProjectsResource } from "./resources/projects.js";
 import { TokensResource } from "./resources/tokens.js";
 import type { MajicoClientConfig } from "./types.js";
@@ -44,6 +45,7 @@ export class MajicoClient {
   readonly research: ResearchResource;
   readonly assets: AssetsResource;
   readonly quiver: QuiverResource;
+  readonly grok: GrokResource;
   readonly projects: ProjectsResource;
 
   readonly config: Readonly<MajicoClientConfig>;
@@ -79,6 +81,7 @@ export class MajicoClient {
     this.research = new ResearchResource(this.config);
     this.assets = new AssetsResource(this.config);
     this.quiver = new QuiverResource(this.config);
+    this.grok = new GrokResource(this.config);
     this.projects = new ProjectsResource(this.config);
   }
 }

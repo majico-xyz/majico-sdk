@@ -46,6 +46,12 @@ export type {
 } from "./types.js";
 export type { PatchHtmlFrameInput } from "./resources/studio.js";
 export type {
+  GrokGenerateSvgInput,
+  GrokGenerateSvgResponse,
+  GrokVectorizeSvgInput,
+  GrokVectorizeSvgResponse,
+} from "./resources/grok.js";
+export type {
   McpProjectListItem,
   McpProjectsListResponse,
   McpProjectPingResponse,
